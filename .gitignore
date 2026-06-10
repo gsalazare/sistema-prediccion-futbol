@@ -1,0 +1,12 @@
+# Carpetas de desarrollo
+node_modules/
+target/
+.idea/
+.venv/
+__pycache__/
+
+# Modelos pesados
+*.pkl
+
+# Otros archivos de sistema
+.DS_Store

@@ -1,45 +1,76 @@
-Sistema de Predicción de Fútbol (Dispatch & AI)
-Este proyecto es una plataforma integral para el análisis y predicción de resultados de partidos de fútbol. Utiliza una arquitectura de microservicios que combina el poder de procesamiento de datos de Python con la robustez de un backend en Java y una interfaz moderna en React.
+# ⚽ Sports Prediction IA (Dispatch & Analysis System)
 
-🚀 Arquitectura del Proyecto
-El sistema está dividido en tres módulos principales:
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Java](https://img.shields.io/badge/Java-17-blue.svg)](https://www.oracle.com/java/)
+[![Python](https://img.shields.io/badge/Python-3.10-green.svg)](https://www.python.org/)
 
-backend-java: Gestiona la lógica de negocio, usuarios y persistencia de datos (Spring Boot).
+---
 
-frontend-prediccion: Interfaz de usuario interactiva donde se consultan las predicciones (React).
+## 🏗️ Arquitectura del Sistema
+Plataforma de ingeniería de software para la predicción de resultados deportivos mediante la integración de **IA**, servicios **Backend Java** y una interfaz en **React**.
 
-ml-python: Motor de Inteligencia Artificial que procesa estadísticas y genera pronósticos (FastAPI).
+| Módulo | Tecnología | Responsabilidad |
+| :--- | :--- | :--- |
+| **Backend API** | Java (Spring Boot) | Orquestación y persistencia |
+| **Prediction Engine** | Python (FastAPI) | Procesamiento de modelos `.pkl` |
+| **Frontend UI** | React | Interfaz de usuario dinámica |
 
-🛠️ Tecnologías Utilizadas
-Backend: Java, Spring Boot, H2 Database.
+[Imagen del diagrama de arquitectura de microservicios]
 
-Frontend: React, JavaScript, CSS.
+---
 
-IA/ML: Python, Scikit-learn, Joblib.
+## 🔌 API Endpoints
+El sistema expone los siguientes endpoints principales para la comunicación entre servicios:
 
-Comunicación: API RESTful.
+- **GET** `/api/v1/predict` : Retorna la predicción calculada por el motor de IA.
+- **POST** `/api/v1/dispatch` : Registra una nueva solicitud de despacho/análisis.
+- **GET** `/api/v1/history` : Obtiene el historial de predicciones almacenadas en la base de datos H2.
 
-⚙️ Instrucciones de Instalación y Configuración
-1. Requisitos Previos
-Tener instalado Java 17+ y Maven.
+---
 
-Tener instalado Node.js (v18+) para el frontend.
+## 🚀 Guía de Instalación
 
-Tener Python 3.10+ instalado.
+### 1. Requisitos de Entorno
+* [Java JDK 17+](https://adoptium.net/) | [Maven](https://maven.apache.org/)
+* [Python 3.10+](https://www.python.org/)
+* [Node.js v18+](https://nodejs.org/)
 
-2. Configuración de Modelos (Importante)
-Debido a que los modelos de entrenamiento (.pkl) superan los 100MB, no se incluyen en este repositorio. Para ejecutar el sistema, realiza lo siguiente:
+### 2. Configuración de Modelos (IA)
+Para habilitar las predicciones, coloca tus archivos de pesos en la carpeta `/ml-python/`:
+- `modelo_ganador.pkl`
+- `modelo_futbol.pkl`
+- `modelo_goles.pkl`
 
-Descarga tus archivos modelo_ganador.pkl, modelo_futbol.pkl y modelo_goles.pkl.
+> **Nota:** Estos archivos no se encuentran en el repositorio por exceder el límite de 100MB de GitHub.
 
-Colócalos dentro de la carpeta ml-python/.
+### 3. Ejecución de Servicios
+Levanta los servicios en el siguiente orden para asegurar la conectividad:
 
-3. Ejecución
-Backend: Navega a backend-java y ejecuta mvn spring-boot:run.
+```bash
+# 1. IA Engine
+cd ml-python && uvicorn main:app --reload
 
-Frontend: Navega a frontend-prediccion, ejecuta npm install y luego npm start.
+# 2. Core Backend
+cd backend-java && mvn spring-boot:run
 
-IA API: Navega a ml-python y ejecuta uvicorn main:app --reload.
+# 3. Web Client
+cd frontend-prediccion && npm install && npm start
+```
+---
+## 💡 Stack Tecnológico
+Para la construcción y mantenimiento de este sistema, se han seleccionado las siguientes tecnologías:
 
-🤝 Contribuciones
-Este proyecto fue desarrollado por Gianfranco Salazar Espino (@gsalarzare). Si deseas contribuir o reportar un error, por favor abre un Issue en el repositorio.
+- **Persistence:** Base de datos H2 (In-Memory) para almacenamiento temporal eficiente.
+- **API:** Arquitectura basada en endpoints RESTful para la comunicación entre servicios.
+- **ML:** Scikit-learn para el entrenamiento e inferencia de los modelos de predicción.
+- **UI:** Componentes funcionales en React para una experiencia de usuario interactiva.
+
+---
+
+## 👨‍💻 Autor
+
+**Gianfranco Salazar Espino**
+
+- [GitHub Profile](https://github.com/gsalarzare)
+
+> *Este proyecto fue desarrollado bajo una arquitectura orientada a la eficiencia en el procesamiento de datos deportivos.*
